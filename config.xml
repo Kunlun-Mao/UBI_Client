@@ -6,7 +6,8 @@
         version     = "1.1.0">
  
     <name>Music Cloud Client</name>
- 
+	<gap:platform name="android" />
+	
     <gap:plugin name="com.randdusing.bluetoothle" version="1.0.0" />
  
 </widget>
