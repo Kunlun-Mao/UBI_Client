@@ -23,12 +23,14 @@
 						}
 					},
 					function() {
-						alert('Bluetooth start scan error');	
+						alert('Bluetooth start scan error');
+						console.error('Bluetooth start scan error');	
 					}
 				)
 			},
 			function(re) {
 				alert('Bluetooth initialized error');
+				console.error('Bluetooth initialized error');
 			}
 		);
 	}
