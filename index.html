@@ -26,8 +26,9 @@
 					console.log('Demo player paided verified.');
 					bluetoothSerial.connect(DemoPlayerBluetoothAddress, function() {
 						console.log('Bluetooth player connect succeed');
-					}, function() {
+					}, function(re) {
 						console.error('Bluetooth connect error.');
+						console.error(re);
 						alert('Bluetooth connect error.');
 					});
 				} else {
