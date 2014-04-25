@@ -15,6 +15,7 @@
 				console.log('Bluetooth initialized succeed.');
 				bluetoothle.startScan(
 					function(re) {
+						console.log(re.status);
 						switch (re.status) {
 							case 'scanStarted': console.log('Bluetooth scan started.'); break;
 							case 'scanResult':
@@ -23,9 +24,9 @@
 								break;	
 						}
 					},
-					function() {
+					function(re) {
 						alert('Bluetooth start scan error');
-						console.error('Bluetooth start scan error');	
+						console.error(re);	
 					}
 				)
 			},
