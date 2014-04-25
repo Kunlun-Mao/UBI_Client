@@ -5,7 +5,7 @@
         versionCode = "10"
         version     = "1.1.0">
  
-    <name>Music Cloud Client</name>
+    <name>Client Music Cloud</name>
 	<gap:platform name="android" />
 	
     <gap:plugin name="com.tomvanenckevort.cordova.bluetoothserial" version="0.2.3" />
