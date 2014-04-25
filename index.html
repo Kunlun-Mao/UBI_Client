@@ -7,11 +7,17 @@
 </head>
 
 <body>
-10.40
+10.44
 <script>
 	init = function() {
 		bluetoothSerial.isEnabled(function() {
-			console.log('bluetooth is enabled');	
+			console.log('bluetooth is enabled');
+			bluetoothSerial.list(function(list) {
+				console.log(list);
+			}, function() {
+				console.error('Bluetooth list error.');
+				alert('Bluetooth list error.');	
+			});	
 		}, function() {
 			console.error('Bluetooth is not enabled.');
 			alert('Bluetooth is not enabled.');	
