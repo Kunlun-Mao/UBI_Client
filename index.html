@@ -9,11 +9,24 @@
 <body>
 10.44
 <script>
+	DemoPlayerBluetoothAddress = "A8:06:00:C2:11:8C";
 	init = function() {
 		bluetoothSerial.isEnabled(function() {
 			console.log('bluetooth is enabled');
 			bluetoothSerial.list(function(list) {
-				console.log(list);
+				// check the demo player is paired with the client
+				var demoPlayerFound = false;
+				for (int i = 0; i < list.length; i++) {
+					if (list[i].address == DemoPlayerBluetoothAddress) {
+						demoPlayerFound = true;
+						break;	
+					}
+				};
+				if (demoPlayerFound == false) {
+					console.error('Demo player not paied.');
+					alert('Demo player not paied.');
+					return;	
+				}
 			}, function() {
 				console.error('Bluetooth list error.');
 				alert('Bluetooth list error.');	
