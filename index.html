@@ -27,13 +27,13 @@
 				};
 				if (demoPlayerFound) { 
 					console.log('Demo player paided verified.');
-					bluetoothSerial.connect(DemoPlayerBluetoothAddress, function() {
+					/**bluetoothSerial.connect(DemoPlayerBluetoothAddress, function() {
 						console.log('Bluetooth player connect succeed');
 					}, function(re) {
 						console.error('Bluetooth connect error.');
 						console.error(re);
 						alert('Bluetooth connect error.');
-					});
+					});**/
 				} else {
 					console.error('Demo player not paied.');
 					alert('Demo player not paied.');
