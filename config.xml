@@ -8,6 +8,6 @@
     <name>Music Cloud Client</name>
 	<gap:platform name="android" />
 	
-    <gap:plugin name="com.megster.cordova.bluetoothserial" version="0.2.2" />
+    <gap:plugin name="com.tomvanenckevort.cordova.bluetoothserial" version="0.2.3" />
  
 </widget>
