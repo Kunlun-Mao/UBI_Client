@@ -22,7 +22,15 @@
 						break;	
 					}
 				};
-				if (demoPlayerFound == false) {
+				if (demoPlayerFound) { 
+					console.log('Demo player paided verified.');
+					bluetoothSerial.connect(DemoPlayerBluetoothAddress, function() {
+						console.log('Bluetooth player connect succeed');
+					}, function() {
+						console.error('Bluetooth connect error.');
+						alert('Bluetooth connect error.');
+					});
+				} else {
 					console.error('Demo player not paied.');
 					alert('Demo player not paied.');
 					return;	
