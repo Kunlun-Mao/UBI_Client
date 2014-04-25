@@ -7,34 +7,15 @@
 </head>
 
 <body>
-10.20
+10.40
 <script>
 	init = function() {
-		bluetoothle.initialize(
-			function(re) {
-				console.log('Bluetooth initialized succeed.');
-				bluetoothle.startScan(
-					function(re) {
-						console.log(re.status);
-						switch (re.status) {
-							case 'scanStarted': console.log('Bluetooth scan started.'); break;
-							case 'scanResult':
-								alert('Device found.');
-								console.log(re);
-								break;	
-						}
-					},
-					function(re) {
-						alert('Bluetooth start scan error');
-						console.error(re);	
-					}
-				)
-			},
-			function(re) {
-				alert('Bluetooth initialized error');
-				console.error('Bluetooth initialized error');
-			}
-		);
+		bluetoothSerial.isEnabled(function() {
+			console.log('bluetooth is enabled');	
+		}, function() {
+			console.error('Bluetooth is not enabled.');
+			alert('Bluetooth is not enabled.');	
+		});
 	}
 </script>
 </body>

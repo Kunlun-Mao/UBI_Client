@@ -8,6 +8,6 @@
     <name>Music Cloud Client</name>
 	<gap:platform name="android" />
 	
-    <gap:plugin name="com.randdusing.bluetoothle" version="1.0.0" />
+    <gap:plugin name="com.megster.cordova.bluetoothserial" version="0.2.2" />
  
 </widget>
