@@ -12,15 +12,26 @@ ihgg
 
 ++++++++++
 <script>
-	bt = function() {
+	init = function() {
 		bluetoothle.initialize(
 			function(re) {
-				alert();
-				console.log(re);
+				console.log('Bluetooth initialized succeed.');
+				bluetoothle.startScan(
+					function(re) {
+						switch (re.status) {
+							case 'scanStarted': console.log('Bluetooth scan started.'); break;
+							case 'scanResult':
+								console.log(re);
+								break;	
+						}
+					},
+					function() {
+						alert('Bluetooth start scan error');	
+					}
+				)
 			},
 			function(re) {
-				alert();
-				console.log(re);
+				alert('Bluetooth initialized error');
 			}
 		);
 	}
