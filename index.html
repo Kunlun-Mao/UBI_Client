@@ -7,7 +7,7 @@
 </head>
 
 <body>
-10.05
+10.20
 <script>
 	init = function() {
 		bluetoothle.initialize(
@@ -18,6 +18,7 @@
 						switch (re.status) {
 							case 'scanStarted': console.log('Bluetooth scan started.'); break;
 							case 'scanResult':
+								alert('Device found.');
 								console.log(re);
 								break;	
 						}
