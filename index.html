@@ -14,6 +14,8 @@
 		bluetoothSerial.isEnabled(function() {
 			console.log('bluetooth is enabled');
 			bluetoothSerial.list(function(list) {
+				console.log('The Bluetooth device list:');
+				console.log(list);
 				// check the demo player is paired with the client
 				var demoPlayerFound = false;
 				for (var i = 0; i < list.length; i++) {
