@@ -5,13 +5,45 @@
 <meta charset="utf-8">
 <title>Untitled Document</title>
 <script src='cordova.js'></script>
+<style>
+ .SendThisSongButton {
+	cursor: pointer;
+	text-decoration:underline;  
+ }
+</style>
 </head>
 
 <body>
-10.44
-<script src="js/jquery-2.1.0.min.js"></script>
+<h1>Music Cloud Client</h1>
+
+<p>
+  <script src="js/jquery-2.1.0.min.js" type='text/javascript'></script>
+</p>
+<p>List of Songs Available in this <em>MusicCloud</em> Point:</p>
+<ul>
+  <li>Divergence &nbsp;&nbsp;&nbsp;&nbsp;<span class="SongOperationButton" data-song-url="https://s3-us-west-2.amazonaws.com/maokunlun-ubi/1.mp3"></span></li>
+  <li>Afrojack - Peanuts&nbsp;&nbsp;&nbsp;&nbsp; <span class="SongOperationButton" data-song-url="https://s3-us-west-2.amazonaws.com/maokunlun-ubi/2.mp3"></span></li>
+  <li>ElektroCity&nbsp;&nbsp;&nbsp;&nbsp;<span class="SongOperationButton" data-song-url="https://s3-us-west-2.amazonaws.com/maokunlun-ubi/3.mp3"></span></li>
+  <li>Stiller&nbsp;&nbsp;&nbsp;&nbsp;<span class="SongOperationButton" data-song-url="https://s3-us-west-2.amazonaws.com/maokunlun-ubi/4.mp3"></span></li>
+  <li>Alpha&nbsp;&nbsp;&nbsp;&nbsp;<span class="SongOperationButton" data-song-url="https://s3-us-west-2.amazonaws.com/maokunlun-ubi/5.mp3"></span></li>
+  <li>Daniel Lex&nbsp;&nbsp;&nbsp;&nbsp;<span class="SongOperationButton" data-song-url="https://s3-us-west-2.amazonaws.com/maokunlun-ubi/6.mp3"></span></li>
+  <li>Powerball&nbsp;&nbsp;&nbsp;&nbsp;<span class="SongOperationButton" data-song-url="https://s3-us-west-2.amazonaws.com/maokunlun-ubi/7.mp3"></span></li>
+</ul>
+<p>(c) Copyrights of songs belongs to artists of these songs</p>
 <script>
+	// bluetooth
 	DemoPlayerBluetoothAddress = "A8:06:00:C2:11:8C";
+	IsBluetoothConnectable = function() {
+		// Three possible returned values, pls refer to IsBluetoothConnectable.ReturnedValues
+		
+		
+	};
+	IsBluetoothConnectable.ReturnedValues = {
+			BLUETOOTH_NOT_ENABLED: 'Bluetooth is not enabled.',
+			NO_PLAYER_FOUND: "Bluetooth player isn't found.",
+			PLAYER_CONNECTABLE: "Bluetooth player connectable."
+	};
+	
 	init = function() {
 		bluetoothSerial.isEnabled(function() {
 			console.log('bluetooth is enabled');
@@ -50,6 +82,20 @@
 			alert('Bluetooth is not enabled.');	
 		});
 	}
-</script>
+  </script>
+  <script>
+  	ShowMusicSendingButton = function() {
+		$('.SongOperationButton').html("<span class='SendThisSongButton'>=&gt;Send This Song</span>");
+		$('.SendThisSongButton').click(function(evt) {
+			var song_url = $(evt.target).parents('.SongOperationButton:first').data('song-url');
+			SendThisSong(song_url);
+		});
+	};
+	
+	SendThisSong = function(song_url) {
+		console.log(song_url);
+	};
+	
+  </script>
 </body>
 </html>
