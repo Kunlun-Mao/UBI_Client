@@ -19,6 +19,16 @@
 <p>
   <script src="js/jquery-2.1.0.min.js" type='text/javascript'></script>
 </p>
+<table width="362" border="1" >
+  <tr style="padding:0">
+    <th width="107" height="25" scope="col">Bluetooth</th>
+    <th width="239" scope="col">
+    	<div id='BluetoothNotEnabledLabel'></div>
+    	<div id='BluetoothDevice1StatusLabel'></div>
+        <div id='BluetoothDevice2StatusLabel'></div>
+    </th>
+  </tr>
+</table>
 <p>List of Songs Available in this <em>MusicCloud</em> Point:</p>
 <ul>
   <li>Divergence &nbsp;&nbsp;&nbsp;&nbsp;<span class="SongOperationButton" data-song-url="https://s3-us-west-2.amazonaws.com/maokunlun-ubi/1.mp3"></span></li>
@@ -32,56 +42,96 @@
 <p>(c) Copyrights of songs belongs to artists of these songs</p>
 <script>
 	// bluetooth
-	DemoPlayerBluetoothAddress = "A8:06:00:C2:11:8C";
-	IsBluetoothConnectable = function() {
-		// Three possible returned values, pls refer to IsBluetoothConnectable.ReturnedValues
-		
-		
+	// Only two bluetooth devices is in the prototype
+	DemoPlayer1BluetoothAddress = "A8:06:00:C2:11:8C";
+	DemoPlayer1BluetoothName = "Point1";
+	DemoPlayer2BluetoothAddress = "";
+	DemoPlayer2BluetoothName = "";
+	
+	const BLUETOOTH_ENABLED_EVENT = 'BLUETOOTH_ENABLED_EVENT';
+	const BLUETOOTH_NOT_ENABLED_EVENT = 'BLUETOOTH_NOT_ENABLED_EVENT';
+	$(window).bind(BLUETOOTH_ENABLED_EVENT, function() {
+		$('#BluetoothNotEnabledLabel').remove();	
+		CheckPairdMusicCloudPlayers();
+	});
+	$(window).bind(BLUETOOTH_NOT_ENABLED_EVENT, function() {
+		$('#BluetoothNotEnabledLabel').html('Bluetooth Not Enabled');
+	});
+	bluetoothSerial.isEnabled(function() {
+		console.log('Bluetooth enabled');
+		$(window).trigger(BLUETOOTH_ENABLED_EVENT);	
+	}, function() {
+		console.error('Bluetooth not enabled');
+		$(window).trigger(BLUETOOTH_NOT_ENABLED_EVENT);	
+	});
+
+	CheckPairdMusicCloudPlayers = function() {
+		bluetoothSerial.list(function(list) {
+			list = $(list);
+			console.log('Bluetooth Paired Devices List:');
+			console.log(list);
+			
+			list.each(function(index, element) {
+                if (element.address == DemoPlayer1BluetoothAddress) {
+					$('#BluetoothDevice1StatusLabel')
+						.append("<span>" + DemoPlayer1BluetoothName + " (Available: </span>")
+						.append($("<span class='BluetoothDeviceConnect' style='text-decoration: underline; cursor: pointer' data-BluetoothDeviceAddress='" + DemoPlayer1BluetoothAddress + "'>connect</span>").click(ConnectBluetoothDevice))
+						.append("<span>)</span>");	
+				}
+				if (element.address == DemoPlayer2BluetoothAddress) {
+					$('#BluetoothDevice2StatusLabel')
+						.append("<span>" + DemoPlayer2BluetoothName + " (Available: </span>")
+						.append($("<span class='BluetoothDeviceConnect' style='text-decoration: underline; cursor: pointer' data-BluetoothDeviceAddress='" + DemoPlayer2BluetoothAddress + "'>connect</span>").click(ConnectBluetoothDevice))
+						.append("<span>)</span>");	
+				}
+            });
+			console.log('Bluetooth List and paied check finishes.');
+		}, function() {
+			alert('Bluetooth List errors');	
+		});
 	};
-	IsBluetoothConnectable.ReturnedValues = {
-			BLUETOOTH_NOT_ENABLED: 'Bluetooth is not enabled.',
-			NO_PLAYER_FOUND: "Bluetooth player isn't found.",
-			PLAYER_CONNECTABLE: "Bluetooth player connectable."
+
+	ConnectBluetoothDevice = function(evt){
+		console.log(evt.target.data('BluetoothDeviceAddress'));
 	};
 	
-	init = function() {
-		bluetoothSerial.isEnabled(function() {
-			console.log('bluetooth is enabled');
-			bluetoothSerial.list(function(list) {
-				console.log('The Bluetooth device list:');
-				console.log(list);
-				// check the demo player is paired with the client
-				var demoPlayerFound = false;
-				for (var i = 0; i < list.length; i++) {
-					console.log(list[i].address);
-					if (list[i].address == DemoPlayerBluetoothAddress) {
-						demoPlayerFound = true;
-						break;	
-					}
-				};
-				if (demoPlayerFound) { 
-					console.log('Demo player paided verified.');
-					bluetoothSerial.connect(DemoPlayerBluetoothAddress, function() {
-						console.log('Bluetooth player connect succeed');
-					}, function(re) {
-						console.error('Bluetooth connect error.');
-						console.error(re);
-						alert('Bluetooth connect error.');
-					});
-				} else {
-					console.error('Demo player not paied.');
-					alert('Demo player not paied.');
-					return;	
+	/*bluetoothSerial.isEnabled(function() {
+		console.log('bluetooth is enabled');
+		bluetoothSerial.list(function(list) {
+			console.log('The Bluetooth device list:');
+			console.log(list);
+			// check the demo player is paired with the client
+			var demoPlayerFound = false;
+			for (var i = 0; i < list.length; i++) {
+				console.log(list[i].address);
+				if (list[i].address == DemoPlayerBluetoothAddress) {
+					demoPlayerFound = true;
+					break;	
 				}
-			}, function() {
-				console.error('Bluetooth list error.');
-				alert('Bluetooth list error.');	
-			});	
+			};
+			if (demoPlayerFound) { 
+				console.log('Demo player paided verified.');
+				bluetoothSerial.connect(DemoPlayerBluetoothAddress, function() {
+					console.log('Bluetooth player connect succeed');
+				}, function(re) {
+					console.error('Bluetooth connect error.');
+					console.error(re);
+					alert('Bluetooth connect error.');
+				});
+			} else {
+				console.error('Demo player not paied.');
+				alert('Demo player not paied.');
+				return;	
+			}
 		}, function() {
-			console.error('Bluetooth is not enabled.');
-			alert('Bluetooth is not enabled.');	
-		});
-	}
+			console.error('Bluetooth list error.');
+			alert('Bluetooth list error.');	
+		});	
+	}, function() {
+		console.error('Bluetooth is not enabled.');
+		alert('Bluetooth is not enabled.');	
+	});*/
+	
   </script>
   <script>
   	ShowMusicSendingButton = function() {
