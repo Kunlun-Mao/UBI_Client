@@ -79,13 +79,13 @@
                 if (element.address == DemoPlayer1BluetoothAddress) {
 					$('#BluetoothDevice1StatusLabel')
 						.append("<span>" + DemoPlayer1BluetoothName + " (Available: </span>")
-						.append($("<span class='BluetoothDeviceConnect' style='text-decoration: underline; cursor: pointer' data-BluetoothDeviceAddress='" + DemoPlayer1BluetoothAddress + "'>connect</span>").click(ConnectBluetoothDevice))
+						.append($("<button class='BluetoothDeviceConnect'  data-BluetoothDeviceAddress='" + DemoPlayer1BluetoothAddress + "'>connect</button>").click(ConnectBluetoothDevice))
 						.append("<span>)</span>");	
 				}
 				if (element.address == DemoPlayer2BluetoothAddress) {
 					$('#BluetoothDevice2StatusLabel')
 						.append("<span>" + DemoPlayer2BluetoothName + " (Available: </span>")
-						.append($("<span class='BluetoothDeviceConnect' style='text-decoration: underline; cursor: pointer' data-BluetoothDeviceAddress='" + DemoPlayer2BluetoothAddress + "'>connect</span>").click(ConnectBluetoothDevice))
+						.append($("<button class='BluetoothDeviceConnect'  data-BluetoothDeviceAddress='" + DemoPlayer2BluetoothAddress + "'>connect</button>").click(ConnectBluetoothDevice))
 						.append("<span>)</span>");	
 				}
             });
