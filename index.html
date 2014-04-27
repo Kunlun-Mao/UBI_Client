@@ -79,13 +79,13 @@
                 if (element.address == DemoPlayer1BluetoothAddress) {
 					$('#BluetoothDevice1StatusLabel')
 						.append("<span>" + DemoPlayer1BluetoothName + " (Available: </span>")
-						.append($("<button class='BluetoothDeviceConnect'  data-BluetoothDeviceAddress='" + DemoPlayer1BluetoothAddress + "'>connect</button>").click(ConnectBluetoothDevice))
+						.append($("<button class='BluetoothDeviceConnect'  data-bluetooth-device-address='" + DemoPlayer1BluetoothAddress + "'>connect</button>").click(ConnectBluetoothDevice))
 						.append("<span>)</span>");	
 				}
 				if (element.address == DemoPlayer2BluetoothAddress) {
 					$('#BluetoothDevice2StatusLabel')
 						.append("<span>" + DemoPlayer2BluetoothName + " (Available: </span>")
-						.append($("<button class='BluetoothDeviceConnect'  data-BluetoothDeviceAddress='" + DemoPlayer2BluetoothAddress + "'>connect</button>").click(ConnectBluetoothDevice))
+						.append($("<button class='BluetoothDeviceConnect'  data-bluetooth-device-address='" + DemoPlayer2BluetoothAddress + "'>connect</button>").click(ConnectBluetoothDevice))
 						.append("<span>)</span>");	
 				}
             });
@@ -96,8 +96,15 @@
 	};
 
 	ConnectBluetoothDevice = function(evt){
-		aa = evt.target/*).data('BluetoothDeviceAddress'))*/;
-		alert();
+		var address = $(evt.target).data('bluetooth-device-address');
+		console.log('Start to connect to this bluetooth address: ' + address);
+		bluetoothSerial.connect(address, function() {
+			console.log('Bluetooth player connect succeed');
+		}, function(re) {
+			console.error('Bluetooth connect error.');
+			console.error(re);
+			alert('Bluetooth connect error.');
+		});
 	};
 	
 	/*bluetoothSerial.isEnabled(function() {
