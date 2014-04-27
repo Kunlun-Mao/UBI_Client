@@ -48,6 +48,16 @@
 	DemoPlayer2BluetoothAddress = "";
 	DemoPlayer2BluetoothName = "";
 	
+	init = function() {
+		bluetoothSerial.isEnabled(function() {
+			console.log('Bluetooth enabled');
+			$(window).trigger(BLUETOOTH_ENABLED_EVENT);	
+		}, function() {
+			console.error('Bluetooth not enabled');
+			$(window).trigger(BLUETOOTH_NOT_ENABLED_EVENT);	
+		});
+	}
+	
 	const BLUETOOTH_ENABLED_EVENT = 'BLUETOOTH_ENABLED_EVENT';
 	const BLUETOOTH_NOT_ENABLED_EVENT = 'BLUETOOTH_NOT_ENABLED_EVENT';
 	$(window).bind(BLUETOOTH_ENABLED_EVENT, function() {
@@ -57,14 +67,8 @@
 	$(window).bind(BLUETOOTH_NOT_ENABLED_EVENT, function() {
 		$('#BluetoothNotEnabledLabel').html('Bluetooth Not Enabled');
 	});
-	bluetoothSerial.isEnabled(function() {
-		console.log('Bluetooth enabled');
-		$(window).trigger(BLUETOOTH_ENABLED_EVENT);	
-	}, function() {
-		console.error('Bluetooth not enabled');
-		$(window).trigger(BLUETOOTH_NOT_ENABLED_EVENT);	
-	});
-
+	
+	
 	CheckPairdMusicCloudPlayers = function() {
 		bluetoothSerial.list(function(list) {
 			list = $(list);
