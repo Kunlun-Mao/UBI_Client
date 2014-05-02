@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<script>
+function getUrlParameters(parameter, staticURL, decode){
+  var currLocation = (staticURL.length)? staticURL : window.location.search,
+       parArr = currLocation.split("?")[1].split("&"),
+       returnBool = true;
+   
+   for(var i = 0; i < parArr.length; i++){
+        parr = parArr[i].split("=");
+        if(parr[0] == parameter){
+            return (decode) ? decodeURIComponent(parr[1]) : parr[1];
+            returnBool = true;
+        }else{
+            returnBool = false;            
+        }
+   }
+   
+   if(!returnBool) return false;  
+}
+id = getUrlParameters('id', '', true);
+PlayerName = getUrlParameters('Device', '', true);
+
+DemoPlayer1BluetoothAddress = "A8:06:00:C2:11:8C";
+DemoPlayer1BluetoothName = "Point1";
+DemoPlayer2BluetoothAddress = "A8:06:00:C2:11:11";
+DemoPlayer2BluetoothName = "Point2";
+
+address = '';
+if (PlayerName = DemoPlayer1BluetoothName) {
+	address = DemoPlayer1BluetoothAddress;
+} else {
+	address = DemoPlayer2BluetoothAddress;
+}
+
+bluetoothSerial.connect(address, function() {
+	console.log('bluetooth connection succeed.');
+	bluetoothSerial.write(id, BluetoothSendingSuccess, BluetoothSendingFail);
+}, function() {
+	alert('right place');
+});
+
+BluetoothSendingSuccess = function() {};
+BluetoothSendingFail = function() {};
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+
+<script>
+function getUrlParameters(parameter, staticURL, decode){
+   /*
+    Function: getUrlParameters
+    Description: Get the value of URL parameters either from 
+                 current URL or static URL
+    Author: Tirumal
+    URL: www.code-tricks.com
+   */
+   var currLocation = (staticURL.length)? staticURL : window.location.search,
+       parArr = currLocation.split("?")[1].split("&"),
+       returnBool = true;
+   
+   for(var i = 0; i < parArr.length; i++){
+        parr = parArr[i].split("=");
+        if(parr[0] == parameter){
+            return (decode) ? decodeURIComponent(parr[1]) : parr[1];
+            returnBool = true;
+        }else{
+            returnBool = false;            
+        }
+   }
+   
+   if(!returnBool) return false;  
+}
+id = getUrlParameters('id', '', true);
+</script>
+</head>
+
+<body>
+<h1>Select Communication Channel</h1>
+<ul>
+  <li><a id='BluetoothLink' href="bluetooth.html">Bluetooth</a></li>
+  <li><a  id='InternetLink' href="internet.html">Internet</a></li>
+  <li><a id='QrcodeLink'  href="qrcode.html">QR Code</a></li>
+  <li><a  id='NfcLink' href="nfc.html">NFC</a></li>
+</ul>
+
+<script>
+	
+	document.getElementById('BluetoothLink').href += '?id=' + id;
+	document.getElementById('InternetLink').href += '?id=' + id;
+	document.getElementById('QrcodeLink').href += '?id=' + id;
+	document.getElementById('NfcLink').href += '?id=' + id;
+</script>
+</body>
+</html>
