@@ -6,13 +6,6 @@
 <script src="js/jquery-2.1.0.min.js" type='text/javascript'></script>
 <script>
 function getUrlParameters(parameter, staticURL, decode){
-   /*
-    Function: getUrlParameters
-    Description: Get the value of URL parameters either from 
-                 current URL or static URL
-    Author: Tirumal
-    URL: www.code-tricks.com
-   */
    var currLocation = (staticURL.length)? staticURL : window.location.search,
        parArr = currLocation.split("?")[1].split("&"),
        returnBool = true;
@@ -55,7 +48,7 @@ SongList = {
 };
 $('#SongName').html(SongList[id]);
 $('#SendBtn').click(function() {
-	window.location.href='BluetoothSend.html?id='+id+'&Device='+device
+	window.location.href='BluetoothSend.html?id='+id+'&Device='+device;
 });
   </script>
 </body>
