@@ -35,6 +35,7 @@ id = getUrlParameters('id', '', true);
 	DemoPlayer2BluetoothName = "Point2";
 	
 	init = function() {
+		alert('init');
 		bluetoothSerial.isEnabled(function() {
 			console.log('Bluetooth enabled');
 			$(window).trigger(BLUETOOTH_ENABLED_EVENT);	
