@@ -49,21 +49,59 @@ id = getUrlParameters('id', '', true);
 
 <script>
 	// scripts around map
-	map = L.map('map').setView([52.9535, -1.1879], 16);
+	position = null;
+	navigator.geolocation.getCurrentPosition(function(pos) {
+		position = pos;
+		map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 16);
+		
+		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+		maxZoom: 18
+	}).addTo(map);
 	
-	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-    maxZoom: 18
-}).addTo(map);
-
-	marker1 = L.marker([52.9547977, -1.1913927]).addTo(map);
-	marker1.bindPopup('Point1').openPopup();
-	marker2 = L.marker([52.9548418, -1.1906915]).addTo(map);
-	marker2.bindPopup('Point2').openPopup();
+		marker1 = L.marker([52.9547977, -1.1913927]).addTo(map);
+		marker1.bindPopup('Point1').openPopup();
+		marker2 = L.marker([52.9548418, -1.1906915]).addTo(map);
+		marker2.bindPopup('Point2').openPopup();
+	});
+	
 </script>
 <script>
+		var FINAL = 6378137.0;  
+          
+         
+        function calcDegree(d){  
+            return d*Math.PI/180.0 ;  
+        }  
+          
+        function calcDistance(f,t){  
+            var flat = calcDegree(f[0]) ;  
+            var flng = calcDegree(f[1]) ;  
+            var tlat = calcDegree(t[0]) ;  
+            var tlng = calcDegree(t[1])  ;  
+              
+            var result = Math.sin(flat)*Math.sin(tlat) ;  
+            result += Math.cos(flat)*Math.cos(tlat)*Math.cos(flng-tlng) ;  
+            return Math.acos(result)*FINAL ;  
+        }
+</script>
+<script>
+	ValidateDistanceEligibility = function(PlayerName) {
+		if (PlayerName = 'Point1') {
+			return calcDistance([52.9547977, -1.1913927], [position.coords.latitude, position.coords.longitude]) < 1;
+		} else {
+			return calcDistance([52.9548418, -1.1906915], [position.coords.latitude, position.coords.longitude]) < 1;
+		};
+	};
+
 	$('#SendBtn').click(function(e) {
-        PlayerName = $('#PlayerSelection').val();
+		PlayerName = $('#PlayerSelection').val();
+		
+		if (ValidateDistanceEligibility(PlayerName) == false) {
+			alert('Please select the player that near you.');
+			return;	
+		};
+        
 		window.location.href = 'InternetSend.html?id='+id+'&Device='+PlayerName;
     });
 </script>
