@@ -4,55 +4,21 @@
 <meta charset="utf-8">
 <title>Untitled Document</title>
 <script src="phonegap.js"></script>
- <script src="js/jquery-2.1.0.min.js" type='text/javascript'></script>
 </head>
 
 <body>
-<div id='MsgPane'></div>
-<script>
-function getUrlParameters(parameter, staticURL, decode){
-  var currLocation = (staticURL.length)? staticURL : window.location.search,
-       parArr = currLocation.split("?")[1].split("&"),
-       returnBool = true;
-   
-   for(var i = 0; i < parArr.length; i++){
-        parr = parArr[i].split("=");
-        if(parr[0] == parameter){
-            return (decode) ? decodeURIComponent(parr[1]) : parr[1];
-            returnBool = true;
-        }else{
-            returnBool = false;            
-        }
-   }
-   
-   if(!returnBool) return false;  
-}
-id = getUrlParameters('id', '', true);
-PlayerName = getUrlParameters('Device', '', true);
-
-DemoPlayer1BluetoothAddress = "A8:06:00:C2:11:8C";
-DemoPlayer1BluetoothName = "Point1";
-DemoPlayer2BluetoothAddress = "A8:06:00:C2:11:11";
-DemoPlayer2BluetoothName = "Point2";
-
-address = '';
-if (PlayerName = DemoPlayer1BluetoothName) {
-	address = DemoPlayer1BluetoothAddress;
-} else {
-	address = DemoPlayer2BluetoothAddress;
-}
-
-$('#MsgPane').append('<div>Send to Bluetooth Address: ' + address + '</div>');
-
-bluetoothSerial.connect(address, function() {
-	$('#MsgPane').append('<div>bluetooth connection succeed.</div>');
-	bluetoothSerial.write(id, BluetoothSendingSuccess, BluetoothSendingFail);
-}, function() {
-	alert('connection fails');
-});
-
-BluetoothSendingSuccess = function() {};
-BluetoothSendingFail = function() {};
-</script>
+<h1>Home Page</h1>
+<p>Songs Available</p>
+<ul>
+  <li><a href="SelectChannel.html?id=1">Divergence </a></li>
+  <li><a href="SelectChannel.html?id=2">Afrojack - Peanuts </a></li>
+  <li> <a href="SelectChannel.html?id=3">ElektroCity </a></li>
+  <li><a href="SelectChannel.html?id=4"> Stiller </a></li>
+  <li><a href="SelectChannel.html?id=5"> Alpha </a></li>
+  <li><a href="SelectChannel.html?id=6"> Daniel Lex </a></li>
+  <li><a href="SelectChannel.html?id=7"> Powerball
+  </a></li>
+</ul>
+<p>(c) Copy rights of these songs belongs to original authors.</p>
 </body>
 </html>
