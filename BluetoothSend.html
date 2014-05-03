@@ -44,15 +44,33 @@ if (PlayerName = DemoPlayer1BluetoothName) {
 
 $('#MsgPane').append('<div>Send to Bluetooth Address: ' + address + '</div>');
 
+BluetoothSendingFailTimeout = true;
 bluetoothSerial.connect(address, function() {
 	$('#MsgPane').append('<div>bluetooth connection succeed.</div>');
+	BluetoothSendingFailTimeout = false;
 	bluetoothSerial.write(id, BluetoothSendingSuccess, BluetoothSendingFail);
 }, function() {
-	alert('connection fails');
+	BluetoothSendingFailTimeout = false;
+	BluetoothSendingFail();
 });
 
-BluetoothSendingSuccess = function() {};
-BluetoothSendingFail = function() {};
+BluetoothSendingSuccess = function() {
+	$('#MsgPane').append("<div>Song sending successfully. <button id='UndoBtn'>Undo</button></div>")	
+	$('#UndoBtn').click(function() {
+		bluetoothSerial.write('undo', function() {
+			$('#MsgPane').append('<div>Undo succeed.</div>');
+		}, function() {
+			$('#MsgPane').append('<div>Undo not sent.</div>');
+		});
+	});
+};
+BluetoothSendingFail = function() {
+	$('#MsgPane').append("<div>Song sending failed. <a href='index.html'>Go to Home Page</button></a>");	
+};
+
+setTimeout(function() {
+	if (BluetoothSendingFailTimeout) BluetoothSendingFail();
+}, 5000);
 </script>
 </body>
 </html>
