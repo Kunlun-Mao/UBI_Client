@@ -41,7 +41,7 @@ if (PlayerName = DemoPlayer1BluetoothName) {
 } else {
 	address = DemoPlayer2BluetoothAddress;
 }
-
+$('#MsgPane').append($('<div>Send to Bluetooth Address: ' + address + '</div>'));
 bluetoothSerial.connect(address, function() {
 	$('#MsgPane').append($('<div>bluetooth connection succeed.</div>'));
 	bluetoothSerial.write(id, BluetoothSendingSuccess, BluetoothSendingFail);
