@@ -53,7 +53,7 @@ bluetoothSerial.connect(address, function() {
 	BluetoothSendingFailTimeout = false;
 	BluetoothSendingFail();
 });
-
+alert('here1');
 BluetoothSendingSuccess = function() {
 	$('#MsgPane').append("<div>Song sending successfully. <button id='UndoBtn'>Undo</button></div>")	
 	$('#UndoBtn').click(function() {
@@ -69,6 +69,7 @@ BluetoothSendingFail = function() {
 };
 
 setTimeout(function() {
+	alert('timeout here');
 	if (BluetoothSendingFailTimeout) BluetoothSendingFail();
 }, 5000);
 </script>
