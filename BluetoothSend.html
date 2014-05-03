@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<div id='#MsgPane'></div>
+<div id='MsgPane'></div>
 <script>
 function getUrlParameters(parameter, staticURL, decode){
   var currLocation = (staticURL.length)? staticURL : window.location.search,
@@ -42,9 +42,9 @@ if (PlayerName = DemoPlayer1BluetoothName) {
 	address = DemoPlayer2BluetoothAddress;
 }
 alert(address);
-$('#MsgPane').append($('<div>Send to Bluetooth Address: ' + address + '</div>'));
+$('#MsgPane').append('<div>Send to Bluetooth Address: ' + address + '</div>');
 bluetoothSerial.connect(address, function() {
-	$('#MsgPane').append($('<div>bluetooth connection succeed.</div>'));
+	$('#MsgPane').append('<div>bluetooth connection succeed.</div>');
 	bluetoothSerial.write(id, BluetoothSendingSuccess, BluetoothSendingFail);
 }, function() {
 	alert('connection fails');
