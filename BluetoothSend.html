@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <title>Untitled Document</title>
 <script src="phonegap.js"></script>
+ <script src="js/jquery-2.1.0.min.js" type='text/javascript'></script>
 </head>
 
 <body>
-
+<div id='#MsgPane'></div>
 <script>
 function getUrlParameters(parameter, staticURL, decode){
   var currLocation = (staticURL.length)? staticURL : window.location.search,
@@ -42,10 +43,10 @@ if (PlayerName = DemoPlayer1BluetoothName) {
 }
 
 bluetoothSerial.connect(address, function() {
-	console.log('bluetooth connection succeed.');
+	$('#MsgPane').append($('<div>bluetooth connection succeed.</div>'));
 	bluetoothSerial.write(id, BluetoothSendingSuccess, BluetoothSendingFail);
 }, function() {
-	alert('right place');
+	alert('connection fails');
 });
 
 BluetoothSendingSuccess = function() {};
