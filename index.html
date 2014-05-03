@@ -44,12 +44,12 @@ if (PlayerName = DemoPlayer1BluetoothName) {
 
 $('#MsgPane').append('<div>Send to Bluetooth Address: ' + address + '</div>');
 console.log(bluetoothSerial);
-bluetoothSerial.connect(address, function() {
+/*bluetoothSerial.connect(address, function() {
 	$('#MsgPane').append('<div>bluetooth connection succeed.</div>');
 	bluetoothSerial.write(id, BluetoothSendingSuccess, BluetoothSendingFail);
 }, function() {
 	alert('connection fails');
-});
+});*/
 
 BluetoothSendingSuccess = function() {};
 BluetoothSendingFail = function() {};
