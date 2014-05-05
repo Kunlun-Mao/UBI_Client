@@ -28,10 +28,10 @@
 	   if(!returnBool) return false;  
 	}
 	id = getUrlParameters('id', '', true);
-	$.ajax('maokunlun.org.me/operation.php?action=add&id=' + id).done(function() {
+	$.ajax('maokunlun.me.uk/operation.php?action=add&id=' + id).done(function() {
 		$('#MsgPane').append("<div>Song sent. <button id='undoBtn'>undo</button> <a href='index.html'>back to home page </a></div>");
 		$('#undoBtn').click(function() {
-			$.ajax('maokunlun.org.me/operation.php.action=undo').done(function() {
+			$.ajax('maokunlun.me.uk/operation.php.action=undo').done(function() {
 				$('#MsgPane').append("<div>undo succeed, <a href='index.html'>home page</a>");
 			});
 		});
